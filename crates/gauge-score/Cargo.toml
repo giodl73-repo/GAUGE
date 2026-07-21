@@ -1,0 +1,10 @@
+[package]
+name = "gauge-score"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+gauge-corpus = { path = "../gauge-corpus" }
+serde = { version = "1", features = ["derive"] }
+thiserror = "1"

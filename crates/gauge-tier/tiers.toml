@@ -1,0 +1,27 @@
+version = "v0"
+rationale = "Provisional tier-SLA record pending calibrated operational evidence."
+evidence_label = "planned"
+
+[tiers.T1]
+trip_time = "fastest scheduled time"
+frequency = "highest frequency"
+reliability = "highest reliability"
+access = "premier corridor access"
+
+[tiers.T2]
+trip_time = "fast intercity time"
+frequency = "frequent service"
+reliability = "high reliability"
+access = "intercity access"
+
+[tiers.T3]
+trip_time = "moderate scheduled time"
+frequency = "scheduled service"
+reliability = "moderate reliability"
+access = "regional access"
+
+[tiers.T4]
+trip_time = "basic scheduled time"
+frequency = "limited service"
+reliability = "baseline reliability"
+access = "feeder access"

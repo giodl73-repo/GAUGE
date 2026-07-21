@@ -1,0 +1,12 @@
+[package]
+name = "gauge-gap"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+gauge-corpus = { path = "../gauge-corpus" }
+gauge-score = { path = "../gauge-score" }
+gauge-tier = { path = "../gauge-tier" }
+serde = { version = "1", features = ["derive"] }
+thiserror = "1"

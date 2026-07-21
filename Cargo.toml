@@ -1,0 +1,8 @@
+[workspace]
+members = ["crates/gauge-network", "crates/gauge-corpus", "crates/gauge-score", "crates/gauge-tier", "crates/gauge-gap", "crates/gauge-cli"]
+resolver = "3"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+version = "0.1.0"
