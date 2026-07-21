@@ -2,14 +2,28 @@
 
 **Rail 2.0 — evidence-gated passenger-rail network analysis and conceptual design.**
 
-GAUGE scores existing US passenger-rail corridors, classifies service tiers,
-finds measurable gaps, and produces bounded design evidence. It applies the
-same corpus-to-gap method as ROUTE without assuming that every corridor should
-be rail or that a positive build case must exist.
+**Tracks connect places. Service promises make rail usable.**
+
+GAUGE asks whether a corridor offers credible trip time, frequency, reliability,
+and connections—not merely whether trains exist. It scores existing US
+passenger-rail corridors, classifies service tiers, finds measurable gaps, and
+preserves the possibility that driving or flying is the stronger answer.
+
+**Series:** [Applied Systems](https://github.com/giodl73-repo/giodl73-repo/blob/main/series/applied-systems.md)
 
 > GAUGE is a research and conceptual-design project. It is not an engineering
 > study, environmental review, procurement plan, timetable, or advocacy brief,
 > and it claims no FRA, Amtrak, state-DOT, or host-railroad endorsement.
+
+## Why this matters
+
+Passenger rail arguments often jump from enthusiasm to a map. GAUGE inserts the
+missing middle: a cited corpus, a common scoring instrument, explicit service
+tiers, and gap evidence that can survive host-railroad, operations, engineering,
+economic, access, and climate review.
+
+The transferable principle is simple: **a mode earns investment by meeting a
+service promise, not by winning a narrative.**
 
 ## What is implemented
 
@@ -22,14 +36,20 @@ be rail or that a positive build case must exist.
 | `gauge-gap` | Gap analysis, dispersion signals, and explicit null results. |
 | `gauge-cli` | CLI front door for corpus, score, tier-SLA, and gap commands. |
 
-The current cited frequency run covers 12 US corridors. Eight fall below the
-declared bar, producing a systemic rather than tail-only gap classification.
+## Evidence
+
+The current
+[frequency and span-of-service analysis](docs/findings/2026-06-frequency-span-of-service.md)
+covers 12 US corridors. Eight fall below the declared bar, producing a systemic
+rather than tail-only gap classification.
+
 That is evidence about the tested corpus, not a national construction mandate.
 
 ## Quick start
 
 ```powershell
-cargo run -p gauge-cli -- --help
+cargo run -p gauge-cli -- corpus --input corpus
+cargo run -p gauge-cli -- gap --input corpus
 cargo test --workspace
 ```
 
