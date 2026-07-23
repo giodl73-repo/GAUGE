@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GAUGE open adoption guide
+    url: https://github.com/giodl73-repo/GAUGE/blob/master/docs/adoption/README.md
+    about: Start here before proposing a rail-service local adaptation or public reuse.
+  - name: GAUGE cited finding
+    url: https://github.com/giodl73-repo/GAUGE/blob/master/docs/findings/2026-06-frequency-span-of-service.md
+    about: Inspect the current frequency and span-of-service evidence boundary.

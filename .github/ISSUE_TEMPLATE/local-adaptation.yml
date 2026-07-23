@@ -1,0 +1,37 @@
+name: Local adaptation proposal
+description: Propose using GAUGE for a bounded rail corridor, region, station-access, or service question.
+title: "Local adaptation: "
+labels: ["adoption", "evidence-needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for a bounded GAUGE adaptation. Public reuse does not create an engineering, environmental, procurement, timetable, advocacy, endorsement, construction, funding, or validation claim.
+  - type: input
+    id: scope
+    attributes:
+      label: Bounded scope
+      placeholder: "Example: Chicago-Milwaukee frequency and span review"
+    validations:
+      required: true
+  - type: textarea
+    id: service-question
+    attributes:
+      label: Service question
+      description: What rail service promise is being tested?
+    validations:
+      required: true
+  - type: textarea
+    id: source-surfaces
+    attributes:
+      label: Existing source surfaces
+      description: List timetable, GTFS, reliability, ridership, station-access, host-railroad, capital-plan, or local sources.
+    validations:
+      required: true
+  - type: textarea
+    id: held-claims
+    attributes:
+      label: Claims that must stay held
+      description: Name timetable, engineering, construction, environmental, procurement, endorsement, funding, or validation claims that should not be made.
+    validations:
+      required: true

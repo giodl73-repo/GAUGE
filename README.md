@@ -15,6 +15,17 @@ preserves the possibility that driving or flying is the stronger answer.
 > study, environmental review, procurement plan, timetable, or advocacy brief,
 > and it claims no FRA, Amtrak, state-DOT, or host-railroad endorsement.
 
+## Use GAUGE
+
+GAUGE is public and open to use as a reference model, cited rail-service
+finding, diagnostic pattern, review discipline, or local adaptation starting
+point.
+
+If you want to apply it to a corridor, region, state rail plan, station-access
+problem, or passenger-rail service question, start with
+[`docs/adoption/README.md`](docs/adoption/README.md). It lays out safe reuse,
+first adaptation steps, contribution targets, and claim boundaries.
+
 ## Why this matters
 
 Passenger rail arguments often jump from enthusiasm to a map. GAUGE inserts the
@@ -65,6 +76,7 @@ A rigorous null result remains a valid result.
 ## Documentation
 
 - [`PRODUCT_PLAN.md`](PRODUCT_PLAN.md) — scope, product shape, and next work.
+- [`docs/adoption/`](docs/adoption) — open reuse, local adaptation, and review path.
 - [`docs/vtrace/`](docs/vtrace) — VTRACE requirements, architecture, trace, and verification.
 - [`context/waves/`](context/waves) — repo-local execution history.
 - [`.roles/ROLE.md`](.roles/ROLE.md) — adversarial review panel.
