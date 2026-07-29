@@ -11,6 +11,16 @@ preserves the possibility that driving or flying is the stronger answer.
 
 **Series:** [Applied Systems](https://github.com/giodl73-repo/giodl73-repo/blob/main/series/applied-systems.md)
 
+## Show someone (start here)
+
+| Audience | Path | Time |
+|---|---|---|
+| **Planner / researcher** | [SHOWCASE.md](SHOWCASE.md) → [frequency/span finding](docs/findings/2026-06-frequency-span-of-service.md) | 15–25 min |
+| **CLI implementer** | [SHOWCASE.md](SHOWCASE.md) → `cargo run -p gauge-cli -- gap --input corpus` | 10–20 min |
+
+Research lab only — not an engineering study, timetable, or FRA/Amtrak endorsement.
+Null results (drive/fly stronger) are valid.
+
 ## Infrastructure 2.0 family
 
 GAUGE is one domain implementation of a shared evidence-first method:
