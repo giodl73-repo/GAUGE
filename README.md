@@ -53,6 +53,18 @@ GAUGE is public and open to use as a reference model, cited rail-service
 finding, diagnostic pattern, review discipline, or local adaptation starting
 point.
 
+### Reuse boundary
+
+GAUGE is currently a specialist passenger-rail analysis product, not a
+supported cross-repository library. Its network model, evidence taxonomy,
+DIM-01..13 scoring, service tiers, gap policy, and CLI remain product-local; no
+portfolio repository pins a `gauge-*` crate or owns compatibility proof.
+
+GAUGE adapted early PYLON scoring implementation, but copied source is not a
+stable provider contract. Infrastructure 2.0 siblings share a method while each
+owns its domain semantics. Direct GAUGE reuse requires a named downstream
+consumer, a bounded versioned surface, and consumer-owned compatibility tests.
+
 If you want to apply it to a corridor, region, state rail plan, station-access
 problem, or passenger-rail service question, start with
 [`docs/adoption/README.md`](docs/adoption/README.md). It lays out safe reuse,
