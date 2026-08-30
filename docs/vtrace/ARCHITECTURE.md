@@ -4,10 +4,10 @@
 
 Repo: GAUGE
 
-Architecture type: target (greenfield). Describes the intended system shape that
-satisfies `REQUIREMENTS.md` and `SPECIFICATION_BASELINE.md`. No components are
-built yet; boundaries and dependency direction are decided here so work packages
-can be allocated cleanly.
+Architecture type: implemented target. This document began as the intended
+system shape that satisfies `REQUIREMENTS.md` and `SPECIFICATION_BASELINE.md`;
+WP-001..006 have since built the planned six-crate workspace. Boundaries and
+dependency direction remain the controlling architecture.
 
 ## Architecture Summary
 
@@ -23,12 +23,12 @@ strictly downward — no cycles — so each can be built and verified in isolati
 
 | Component | Boundary ID | Responsibility | Requirement IDs | Interfaces | Evidence |
 |---|---|---|---|---|---|
-| `gauge-network` (rail kernel) | PKG-001 | Typed graph (Station/Segment/Corridor), stable identity, connectivity metrics (DIM-04), trip-time/feasibility helpers. | REQ-004, REQ-005, REQ-007 | IF-005 (lib API) | future VER-004/005/007 |
-| `gauge-corpus` (corpus + data) | PKG-002 | Corpus file IO + schema, `data/sources.md` registry, evidence labels. | REQ-001, REQ-002, REQ-003 | IF-001, IF-002 | future VER-001/002/003 |
-| `gauge-score` (scoring) | PKG-003 | Dimension pool DIM-01..13, 0–10 scoring, rubric calibration + versioning. | REQ-006 | IF-003 | future VER-006 |
-| `gauge-tier` (tier/SLA) | PKG-004 | Tier classification T1–T4, SLA terms, DIM-13 conformance, tier-SLA gaps. | REQ-014, REQ-015 | IF-004 | future VER-014/015 |
-| `gauge-gap` (gap analysis) | PKG-005 | Plot dimension space, find under-served regions, record null results. | REQ-008 | (internal) | future VER-008 |
-| `gauge-cli` (orchestration) | PKG-006 | Commands that drive the pipeline and emit artifacts. | REQ-001 (regen path) | IF-006 (CLI) | future VER-001 |
+| `gauge-network` (rail kernel) | PKG-001 | Typed graph (Station/Segment/Corridor), stable identity, connectivity metrics (DIM-04), trip-time/feasibility helpers. | REQ-004, REQ-005, REQ-007 | IF-005 (lib API) | VER-004/005/007 |
+| `gauge-corpus` (corpus + data) | PKG-002 | Corpus file IO + schema, `data/sources.md` registry, evidence labels. | REQ-001, REQ-002, REQ-003 | IF-001, IF-002 | VER-001/002/003 |
+| `gauge-score` (scoring) | PKG-003 | Dimension pool DIM-01..13, 0–10 scoring, rubric calibration + versioning. | REQ-006 | IF-003 | VER-006 |
+| `gauge-tier` (tier/SLA) | PKG-004 | Tier classification T1–T4, SLA terms, DIM-13 conformance, tier-SLA gaps. | REQ-014, REQ-015 | IF-004 | VER-014/015 |
+| `gauge-gap` (gap analysis) | PKG-005 | Plot dimension space, find under-served regions, record null results. | REQ-008 | (internal) | VER-008 |
+| `gauge-cli` (orchestration) | PKG-006 | Commands that drive the pipeline and emit artifacts. | REQ-001 (regen path) | IF-006 (CLI) | VER-001 |
 | review layer (`.roles/`) | — (docs, not a crate) | Parliament + editorial gate, scope boundary. | REQ-009, REQ-010, REQ-011 | review records | EVID-009/010/011 |
 
 ## Package / Language Boundaries
@@ -66,9 +66,9 @@ public sources (FRA / Amtrak / BTS-NTAD / Census)
 
 | Dependency | Purpose | Boundary / Risk | Verification |
 |---|---|---|---|
-| `petgraph` | Graph data structure + algorithms in PKG-001. | Well-scoped; low risk. | future cargo test |
-| `serde` / `csv` | Corpus + data IO in PKG-002. | Low risk. | future cargo test |
-| `clap` | CLI in PKG-006. | Low risk. | future cargo test |
+| `petgraph` | Graph data structure + algorithms in PKG-001. | Well-scoped; low risk. | cargo test |
+| `serde` / `csv` | Corpus + data IO in PKG-002. | Low risk. | cargo test |
+| `clap` | CLI in PKG-006. | Low risk. | cargo test |
 | FLETCH (portfolio) | Source-byte/paged data acquisition + cache manifests. | Planned; not yet wired. Avoid TRACKER-relative paths (CON). | intake + future gate |
 | PROOF (portfolio) | Markdown QA for docs/artifacts. | Tool/CLI relationship, not runtime. | `proof check .` (active) |
 | METIS-CORE / RLINE (portfolio) | Optional graph partitioning / shared kernels for gap analysis. | Deferred until gap wave. | deferred |
@@ -87,7 +87,7 @@ public sources (FRA / Amtrak / BTS-NTAD / Census)
 
 - Operator/host data openness (SPEC-UNK-001/002) may force proxy-heavy early
   corpus, especially for OTP.
-- FLETCH integration is planned, not proven; until then acquisition is manual.
+- FLETCH integration is planned, not proven; current acquisition is manual/source-registry based.
 - Partitioning needs (METIS-CORE) are unproven until the gap wave.
 
 ## Role Review Notes
