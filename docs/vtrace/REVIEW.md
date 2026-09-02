@@ -70,6 +70,13 @@ No open critical or major findings.
 - Decide explicit shared-track delay modelling (DEF-002) before reliability-based
   public claims.
 
+## PITFALL Boundary
+
+No finding currently has public-authority status. The first DIM-07
+frequency/span finding remains a narrow research result until a named release
+artifact preserves visible unassessed dimensions, cited corpus/source basis,
+reproducible run evidence, and full role review.
+
 ## Validation Commands
 
 ```powershell

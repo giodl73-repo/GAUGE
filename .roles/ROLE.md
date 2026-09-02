@@ -72,3 +72,9 @@ and dispositions are recorded in:
 A stage reaches its **fixed point** when no unresolved critical or major
 actionable finding remains and every deferred item names a later stage or work
 package.
+
+## PITFALL Gates
+
+| Gate | Required roles | Blocks |
+|---|---|---|
+| First public rail finding | Rail Planner (FRA/national), Rail Civil Engineer, Operations & Reliability Officer, Transport Economist, Freight-Host Railroad Realist, Citation Auditor, Scope Keeper, Numeracy Checker | Treating the cited DIM-07 frequency/span finding, gap CLI output, or portfolio summary as an engineering study, timetable, procurement plan, advocacy mandate, FRA/Amtrak/state-DOT/host-railroad position, funding instruction, or national construction mandate before a named release artifact, visible unassessed dimensions, cited corpus/source basis, reproducible run, and full role review exist. |

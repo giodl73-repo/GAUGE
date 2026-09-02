@@ -75,7 +75,7 @@ first finding explicitly limits itself to DIM-07.
 
 ## GAUGE-I-05: Public Reuse Requires Boundary Review
 
-**Status:** PARTIAL
+**Status:** MITIGATED
 
 **Claim:** Public or downstream reuse requires scope boundary language and role
 review before GAUGE output is treated as a decision artifact.
@@ -84,7 +84,11 @@ review before GAUGE output is treated as a decision artifact.
 study, timetable, procurement plan, advocacy mandate, or endorsement.
 
 **Enforcement:** README/product boundaries, VTRACE review, role panel, and
-PITFALL tracking keep public reuse bounded.
+PITFALL tracking keep public reuse bounded. The retained PITFALL policy check
+requires the finding to keep DIM-07-only scope, unassessed dimensions, no
+authority language, and explicit role-review prerequisites visible.
 
 **Evidence:** `README.md`, `PRODUCT_PLAN.md`, `.roles/ROLE.md`,
-`docs/vtrace/REVIEW.md`, and `.pitfall/gauge-pitfalls.md`.
+`docs/findings/2026-06-frequency-span-of-service.md`,
+`docs/vtrace/REVIEW.md`, `docs/pitfall-boundaries.v1.json`,
+`tests/check-pitfall-policy.ps1`, and `.pitfall/gauge-pitfalls.md`.

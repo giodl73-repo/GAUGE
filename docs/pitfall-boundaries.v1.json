@@ -1,0 +1,32 @@
+{
+  "schema": "pitfall-boundaries.v1",
+  "repo": "GAUGE",
+  "updated": "2026-09-02",
+  "boundaries": [
+    {
+      "id": "GAUGE-PB-01",
+      "pitfalls": ["GAUGE-PF-05"],
+      "name": "first-rail-finding-is-not-public-authority",
+      "rule": "The cited DIM-07 frequency/span finding, gap CLI output, and portfolio summaries are research-lab evidence only. They do not authorize an engineering study, timetable, procurement plan, advocacy mandate, FRA/Amtrak/state-DOT/host-railroad position, funding instruction, or national construction mandate. Public promotion requires a named release artifact, visible unassessed dimensions, cited corpus/source basis, reproducible run, and full role review.",
+      "required_reviewers": [
+        "Rail Planner (FRA/national)",
+        "Rail Civil Engineer",
+        "Operations & Reliability Officer",
+        "Transport Economist",
+        "Freight-Host Railroad Realist",
+        "Citation Auditor",
+        "Scope Keeper",
+        "Numeracy Checker"
+      ],
+      "required_evidence": [
+        "README.md",
+        "PRODUCT_PLAN.md",
+        "docs/findings/2026-06-frequency-span-of-service.md",
+        "docs/adoption/README.md",
+        "docs/vtrace/REVIEW.md",
+        ".roles/ROLE.md",
+        "tests/check-pitfall-policy.ps1"
+      ]
+    }
+  ]
+}

@@ -89,7 +89,7 @@ rewriting the historical foundation record.
 
 ## GAUGE-PF-05: First Rail Finding Becomes Public Authority
 
-**Status:** OPEN
+**Status:** MITIGATED
 
 **Pattern:** The cited frequency/span finding, CLI gap output, or portfolio
 summary is treated as an engineering study, timetable, procurement plan,
@@ -109,4 +109,5 @@ artifact.
 
 **Evidence:** `README.md`, `PRODUCT_PLAN.md`,
 `docs/findings/2026-06-frequency-span-of-service.md`,
-`docs/vtrace/REVIEW.md`, and `.roles/ROLE.md`.
+`docs/adoption/README.md`, `docs/vtrace/REVIEW.md`, `.roles/ROLE.md`,
+`docs/pitfall-boundaries.v1.json`, and `tests/check-pitfall-policy.ps1`.
