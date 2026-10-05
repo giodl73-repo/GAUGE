@@ -58,6 +58,8 @@ pub struct Input {
     pub corridor: usize,
     pub round_trips: f64,
     pub bar: f64,
+    #[serde(default)]
+    pub portfolio: std::collections::BTreeMap<String, f64>,
 }
 #[derive(Debug, Serialize)]
 pub struct Corridor {
@@ -167,19 +169,30 @@ pub fn evaluate(input: Input) -> Result<Output, String> {
     }
     let mut corpus = corpus()?;
     let baseline = run(&corpus, input.bar)?;
-    let selected = &mut corpus[input.corridor];
-    selected.scores.insert(
-        "DIM-07".into(),
-        frequency_score(input.round_trips)
-            .map_err(|e| e.to_string())?
-            .value(),
-    );
-    selected.quantities[0].value = input.round_trips;
-    selected.quantities[0].label = Some(gauge_corpus::EvidenceLabel::Simulated);
-    selected.quantities[0].source_id = None;
+    let mut changes = input.portfolio.clone();
+    changes
+        .entry(FIXTURES[input.corridor].0.into())
+        .or_insert(input.round_trips);
+    for (slug, trips) in changes {
+        let index = FIXTURES
+            .iter()
+            .position(|(key, _)| *key == slug)
+            .ok_or("Unknown portfolio corridor")?;
+        if !trips.is_finite() || !(0. ..=32.).contains(&trips) {
+            return Err("Portfolio frequencies must be finite and within 0–32".into());
+        }
+        let selected = &mut corpus[index];
+        selected.scores.insert(
+            "DIM-07".into(),
+            frequency_score(trips).map_err(|e| e.to_string())?.value(),
+        );
+        selected.quantities[0].value = trips;
+        selected.quantities[0].label = Some(gauge_corpus::EvidenceLabel::Simulated);
+        selected.quantities[0].source_id = None;
+    }
     let scenario = run(&corpus, input.bar)?;
     Ok(Output {
-        model: "gauge-frequency-v1",
+        model: "gauge-frequency-v2",
         input,
         baseline,
         scenario,
@@ -201,6 +214,7 @@ mod tests {
     #[test]
     fn historical_baseline_and_changed_membership() {
         let out = evaluate(Input {
+            portfolio: Default::default(),
             corridor: 0,
             round_trips: 16.,
             bar: 7.,
@@ -215,6 +229,7 @@ mod tests {
     #[test]
     fn exact_bar_agrees_with_displayed_membership() {
         let out = evaluate(Input {
+            portfolio: Default::default(),
             corridor: 0,
             round_trips: 5.8,
             bar: 3.6,
@@ -229,6 +244,7 @@ mod tests {
     fn invalid_and_boundary_inputs() {
         for v in [-1., 33., f64::NAN] {
             assert!(evaluate(Input {
+                portfolio: Default::default(),
                 corridor: 0,
                 round_trips: v,
                 bar: 7.
@@ -239,6 +255,7 @@ mod tests {
         assert!(evaluate_json(&"x".repeat(8193)).is_err());
         assert_eq!(
             evaluate(Input {
+                portfolio: Default::default(),
                 corridor: 0,
                 round_trips: 0.,
                 bar: 0.
@@ -249,6 +266,25 @@ mod tests {
             0
         );
         assert_eq!(frequency_score(32.).unwrap().value(), 10.);
+    }
+    #[test]
+    fn portfolio_changes_multiple_entries_and_rejects_unknown_keys() {
+        let mut input = Input {
+            corridor: 2,
+            round_trips: 12.,
+            bar: 7.,
+            portfolio: std::collections::BTreeMap::from([
+                ("us-california-zephyr".into(), 16.),
+                ("us-cascades".into(), 16.),
+            ]),
+        };
+        let out = evaluate(input.clone()).unwrap();
+        assert_eq!(out.baseline.below, 8);
+        assert_eq!(out.scenario.below, 6);
+        assert_eq!(out.scenario.corridors[2].trips, 16.);
+        assert_eq!(out.scenario.corridors[1].frequency_basis, "historical");
+        input.portfolio.insert("unknown".into(), 1.);
+        assert!(evaluate(input).is_err());
     }
     #[test]
     fn corpus_frequency_transform_matches_stored_scores() {

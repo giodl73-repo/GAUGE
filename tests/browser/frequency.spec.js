@@ -6,7 +6,7 @@ test('historical baseline, keyboard scenario, share and JSON use actual WASM',as
  await expect(page.locator('#below')).toHaveText('8 → 8');await expect(page.locator('#rows tr')).toHaveCount(12);
  await page.locator('#trips').focus();await page.keyboard.press('End');await expect(page.locator('#status')).toContainText('Ready');
  await expect(page.locator('#below')).toHaveText('8 → 7');await expect(page.locator('#score')).toHaveText('0.6 → 10.0');
- const promise=page.waitForEvent('download');await page.locator('#download').click();const download=await promise;const json=JSON.parse(await fs.readFile(await download.path(),'utf8'));expect(json.model).toBe('gauge-frequency-v1');expect(json.input.round_trips).toBe(32);expect(json.baseline.corridors[0].historical_source_id).toBe('wikipedia-amtrak-routes');
+ const promise=page.waitForEvent('download');await page.locator('#download').click();const download=await promise;const json=JSON.parse(await fs.readFile(await download.path(),'utf8'));expect(json.model).toBe('gauge-frequency-v2');expect(json.input.round_trips).toBe(32);expect(json.baseline.corridors[0].historical_source_id).toBe('wikipedia-amtrak-routes');
  await page.locator('#share').click();await expect(page).toHaveURL(/round_trips=32/);await page.reload();await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#below')).toHaveText('8 → 7');
  await page.getByRole('button',{name:'Reset',exact:true}).click();await expect(page.locator('#below')).toHaveText('8 → 8');expect(errors).toEqual([]);
 });
@@ -25,7 +25,7 @@ test('invalid URL recovers and failed WASM disables exports',async({page})=>{
 test('rapid changes initialize each corridor from its own historical frequency',async({page})=>{
  await page.goto('/GAUGE/');await expect(page.locator('#status')).toContainText('Ready');
  await page.evaluate(()=>{const trips=document.getElementById('trips'),corridor=document.getElementById('corridor');trips.value=32;trips.dispatchEvent(new Event('input',{bubbles:true}));corridor.value=2;corridor.dispatchEvent(new Event('change',{bubbles:true}));corridor.value=7;corridor.dispatchEvent(new Event('change',{bubbles:true}));});
- await expect(page.locator('#trips')).toHaveValue('16');await expect(page.locator('#name')).toHaveText('Acela');await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#below')).toHaveText('8 → 8');
+ await expect(page.locator('#trips')).toHaveValue('16');await expect(page.locator('#name')).toHaveText('Acela');await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#below')).toHaveText('8 → 7');
 });
 
 test('reset during WASM loading clears shared corridor and assumptions',async({page})=>{
@@ -36,4 +36,27 @@ test('reset during WASM loading clears shared corridor and assumptions',async({p
 });
 test('exact adequacy bar keeps displayed membership and classification consistent',async({page})=>{
  await page.goto('/GAUGE/?corridor=0&round_trips=5.8&bar=3.6');await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#below')).toHaveText('6 → 5');await expect(page.locator('#classification')).toContainText('Concentrated frequency tail');
+});
+
+test('portfolio retains multiple edits and shares the complete comparison',async({page})=>{
+ await page.goto('/GAUGE/?corridor=2&round_trips=12&bar=7');await expect(page.locator('#status')).toContainText('Ready');
+ await page.locator('#trips').fill('16');await expect(page.locator('#below')).toHaveText('8 → 7');
+ await page.locator('#corridor').selectOption('0');await page.locator('#trips').fill('16');await expect(page.locator('#below')).toHaveText('8 → 6');
+ await page.locator('#corridor').selectOption('2');await expect(page.locator('#trips')).toHaveValue('16');
+ await page.locator('#share').click();await page.reload();await expect(page.locator('#below')).toHaveText('8 → 6');
+ const pending=page.waitForEvent('download');await page.locator('#download').click();const file=await pending;const data=JSON.parse(await fs.readFile(await file.path(),'utf8'));expect(data.input.portfolio['us-cascades']).toBe(16);expect(data.input.portfolio['us-california-zephyr']).toBe(16);
+ await page.locator('#minimum').click();await expect(page.locator('#below')).toHaveText('8 → 0');
+ await page.getByRole('button',{name:'Reset',exact:true}).click();await expect(page.locator('#below')).toHaveText('8 → 8');await expect(page.locator('#edited')).toContainText('0 corridor edits');
+});
+
+test('mixed legacy selection and portfolio URL retain both edits on switching',async({page})=>{
+ const map=encodeURIComponent(JSON.stringify({'us-california-zephyr':16}));await page.goto('/GAUGE/?corridor=2&round_trips=16&bar=7&portfolio='+map);await expect(page.locator('#below')).toHaveText('8 → 6');
+ await page.locator('#corridor').selectOption('0');await expect(page.locator('#below')).toHaveText('8 → 6');await page.locator('#share').click();await page.reload();await expect(page.locator('#below')).toHaveText('8 → 6');
+ await page.locator('#corridor').selectOption('2');await expect(page.locator('#trips')).toHaveValue('16');
+});
+
+test('URL precision matches range controls and loading cannot discard a frequency edit',async({page})=>{
+ const map=encodeURIComponent(JSON.stringify({'us-cascades':5.849}));await page.goto('/GAUGE/?corridor=2&round_trips=5.8&bar=3.6&portfolio='+map);await expect(page.locator('#name')).toHaveText('California Zephyr');await expect(page.locator('#trips')).toHaveValue('1');
+ await page.route('**/pkg/gauge_web_bg.wasm',async route=>{await new Promise(resolve=>setTimeout(resolve,1000));await route.continue();});
+ await page.goto('/GAUGE/?corridor=2&round_trips=16&portfolio='+encodeURIComponent(JSON.stringify({'us-cascades':16})));await expect(page.locator('#trips')).toBeDisabled();await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#trips')).toBeEnabled();await page.locator('#trips').fill('12');await expect(page.locator('#score')).toHaveText('2.5 → 7.5');
 });

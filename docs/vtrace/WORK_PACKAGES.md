@@ -232,3 +232,26 @@ Verification: format, strict workspace clippy, all native tests, baseline eight-
 Fixed point: no unresolved critical/major actionable finding. All resolved contract changes incorporated above before implementation. This is a product adapter acceptance, not promotion of a rail proposal.
 
 WP-007 implementation completion: 41 Rust tests, strict workspace clippy, six real-WASM browser tests and clean final Codex review. Native gap API now accepts explicit Score threshold overrides while preserving existing default weighted thresholds. Pages publication is checked after merge.
+
+# WP-008: Frequency portfolio scenarios
+
+Status: accepted for implementation, 2026-10-05. Parent: WP-007, REQ-001/003/010; DIM-07 and native gap threshold interface. This is a browser adapter, not a rail proposal.
+
+Contract: preserve the historical 12-entry baseline; retain hypothetical edits by stable corpus slug across corridor selection; compare the complete edited portfolio against that baseline with one common adequacy bar. Backward-compatible single-corridor URLs still work. Optional bounded portfolio map overrides the selected legacy value. Reset restores the historical comparison. A minimum-frequency preset is hypothetical, never a timetable. Share and JSON export reproduce every edited corridor. Native Rust validates all keys and finite 0–32 round trips/day. No changes to tier, capacity, cost, ridership, reliability, equity or modal-shift evidence.
+
+## Role Review Notes (AI archetype lenses)
+
+| Role | Disposition | Contract |
+|---|---|---|
+| Rail Planner | pass | All 12 corridors retained; no claim of network benefit beyond DIM-07. |
+| Rail Civil Engineer | pass | No geometry, speed or buildability outputs. |
+| Operations Officer | resolved | Portfolio frequency remains hypothetical, not an operable timetable. |
+| Transport Economist | defer | Cost and ridership assessment requires a later sourced work package. |
+| Climate/Modal Advocate | defer | No modal-shift/carbon outputs; later sourced dimensions required. |
+| Equity/Access Advocate | resolved | Historical and changed rows remain visible, including low-frequency corridors. |
+| Freight-Host Realist | resolved | Added service does not prove host-track capacity. |
+| Citation Auditor | pass | Historical sources preserved; every modified quantity labelled hypothetical. |
+| Scope Keeper | resolved | Only DIM-07 changes; no tier-SLA or construction recommendation. |
+| Numeracy Checker | resolved | Shared bar, finite bounds, stable keys, existing one-decimal transform. |
+
+Fixed point: no unresolved critical/major finding. Exit: format, strict clippy, workspace tests, real-WASM multi-edit/preset/reset/share/export and legacy-link tests, clean Codex review and exact-head Pages deployment.
