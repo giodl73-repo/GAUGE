@@ -14,7 +14,7 @@ preserves the possibility that driving or flying is the stronger answer.
 ## Explore in your browser
 
 [Open the Rust-powered frequency explorer](https://giodl73-repo.github.io/GAUGE/).
-Choose a historical corridor, change hypothetical round trips/day and the provisional adequacy bar, compare corpus frequency gaps, share a scenario or download JSON.
+Build a multi-corridor portfolio, retain hypothetical round trips/day edits when switching corridors and the provisional adequacy bar, compare corpus frequency gaps, share a scenario or download JSON.
 The committed 2023/2024 corpus is historical, not a live timetable. Only DIM-07 is assessed; tier metadata does not imply tier-SLA conformance. Added service does not prove host-track capacity or operating feasibility.
 Build and scope: [browser explorer](docs/browser-explorer.md).
 

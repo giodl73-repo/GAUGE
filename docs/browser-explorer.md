@@ -9,3 +9,7 @@ Reproduce: cargo test --workspace --locked; cargo clippy --workspace --all-targe
 Pages build output stays within dist and is capped at 5 MB. Master deploys after native/browser checks. Pull requests build without deployment. Site offers JSON, Rust source and WASM downloads, source registry and mixed-license notice. Browser JavaScript presents Rust outputs; a worker keeps the UI responsive and drops stale responses.
 
 WP-007 acceptance and all ten role dispositions are in docs/vtrace/WORK_PACKAGES.md and context/waves/2026-10-05-corridor-pages/WAVE.md.
+
+## Portfolio scenarios (v2)
+
+Edits are retained by corpus slug when switching corridors. The optional `portfolio` URL parameter is a JSON map of slug to hypothetical round trips/day; it overrides the legacy selected-corridor value. Existing `corridor`, `round_trips`, `bar` links remain supported. The 12-trip preset raises low frequencies while preserving higher ones. Reset clears all edits. Export includes the complete map and both runs. Historical sources and all unassessed dimensions remain unchanged.
