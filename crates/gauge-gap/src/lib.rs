@@ -1,4 +1,4 @@
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 use gauge_corpus::{CorpusEntry, EvidenceLabel};
 use gauge_score::{Dimension, Rubric, Score, ScoreError};
@@ -45,10 +45,23 @@ pub struct NullResult {
 }
 
 pub fn find_gaps(corpus: &[CorpusEntry], rubric: &Rubric) -> Result<Vec<GapRegion>, GapError> {
+    find_gaps_with_thresholds(corpus, rubric, &BTreeMap::new())
+}
+
+/// Explicit score bars for sensitivity runs; avoids converting bars through weights.
+/// Existing callers retain the default rubric-weighted thresholds.
+pub fn find_gaps_with_thresholds(
+    corpus: &[CorpusEntry],
+    rubric: &Rubric,
+    thresholds: &BTreeMap<Dimension, Score>,
+) -> Result<Vec<GapRegion>, GapError> {
     let mut gaps = Vec::new();
 
     for dimension in Dimension::ALL {
-        let threshold = threshold_for(rubric, dimension)?;
+        let threshold = match thresholds.get(&dimension) {
+            Some(score) => *score,
+            None => threshold_for(rubric, dimension)?,
+        };
         let scored = scored_entries(corpus, dimension)?;
         if scored.is_empty() {
             gaps.push(GapRegion {

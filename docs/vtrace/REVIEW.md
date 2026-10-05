@@ -13,9 +13,12 @@ Date: 2026-06-25
 Reviewer / lenses: GAUGE `.roles` parliament + editorial panel (simulated against
 committed role files), requirements-traceability and V&V lenses.
 
-This gate decides whether GAUGE's **planning baseline** is coherent enough to
-proceed to implementation planning (architecture, interfaces, work packages). It
-does **not** claim any implementation, scored corpus, or validated result.
+This gate originally decided whether GAUGE's **planning baseline** was coherent
+enough to proceed to implementation planning. The implementation wave has since
+closed; the current review posture is that the code path validates, the first
+DIM-07 corridor finding is reproducible, and promotion still requires scope
+discipline because the result is not an engineering study, timetable,
+procurement plan, advocacy brief, or endorsement.
 
 ## Role Review Matrix
 
@@ -24,8 +27,8 @@ does **not** claim any implementation, scored corpus, or validated result.
 | Systems engineering | yes | Rail Planner + Scope Keeper | pass | MISSION→CONOPS→REQUIREMENTS→SPEC→TRACE form a coherent chain; tier model integrated. |
 | Requirements traceability | yes | Traceability lens | pass | `TRACE.md` maps NEED-001..007 / OPS-001..006 → REQ-001..015 → SPEC-001..012; gaps labelled. |
 | V&V | yes | V&V lens | pass_with_risk | `VERIFICATION.md` methods credible; most results `pending` (greenfield). |
-| Software assurance | no | — | not_required | No code yet; revisit at implementation planning. |
-| Security/privacy | no | — | not_required | No data ingestion/code yet; revisit when sources/CLI exist. |
+| Software assurance | yes | Software-assurance lens | pass | Rust workspace passed fmt, clippy, locked tests, CLI help, and gap replay. |
+| Security/privacy | yes | Security/privacy lens | pass | No secrets or personal data path; corpus uses public source registry and labelled evidence. |
 | Safety/mission impact | yes | Operations Officer + Freight-Host Realist | pass | Reliability dispatch basis (SPEC-RB-01) and tier-SLA gating (REQ-015) control overclaim of reliability; host-track assumptions must be explicit. |
 | Source custody | yes | Citation Auditor + data steward | pass_with_risk | Citation discipline specified (SPEC-009); no corpus sources ingested yet. |
 | Configuration/change control | yes | Scope Keeper | pass | Public contracts IF-001..004 have change-control triggers; VTRACE one-at-a-time enforced. |
@@ -62,15 +65,26 @@ No open critical or major findings.
 
 ## Required Follow-Up
 
-- Add ARCHITECTURE and INTERFACES before non-trivial implementation (DEF-004).
-- Author IMPLEMENTATION_PLAN + WORK_PACKAGES before writing code.
-- Build `data/sources.md` and the corpus SCHEMA before the first corpus entry.
-- Decide explicit shared-track delay modelling (DEF-002) at the corpus wave.
+- Keep the first DIM-07 finding labelled as a narrow research result.
+- Expand dimensions only when source registry and evidence labels are ready.
+- Decide explicit shared-track delay modelling (DEF-002) before reliability-based
+  public claims.
+
+## PITFALL Boundary
+
+No finding currently has public-authority status. The first DIM-07
+frequency/span finding remains a narrow research result until a named release
+artifact preserves visible unassessed dimensions, cited corpus/source basis,
+reproducible run evidence, and full role review.
 
 ## Validation Commands
 
 ```powershell
-proof check .
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace --locked
+cargo run -p gauge-cli -- --help
+cargo run -p gauge-cli -- gap --input corpus
 git diff --check
 ```
 
@@ -79,10 +93,10 @@ git diff --check
 The GAUGE planning baseline (minimum VTRACE slice: MISSION, CONOPS, REQUIREMENTS,
 SPECIFICATION_BASELINE, TRACE, VERIFICATION, REVIEW) is internally coherent, fully
 traced, and reviewed against the real `.roles` panel. Three minor findings were
-closed during earlier stages; remaining risk is the expected greenfield risk
-(provisional values, pending implementation evidence), all explicitly accepted or
-deferred.
+closed during earlier stages. The current residual risk is not missing
+implementation; it is bounded evidence coverage and public overinterpretation of
+the first finding.
 
-**Decision: pass_with_risk.** GAUGE may proceed to implementation planning
-(ARCHITECTURE → INTERFACES → IMPLEMENTATION_PLAN → WORK_PACKAGES). No public
-result, scored corpus, or construction claim is authorized by this gate.
+**Decision: pass_with_risk.** GAUGE may publish the narrow research finding with
+boundary language. No engineering, timetable, procurement, advocacy, or
+endorsement claim is authorized by this gate.

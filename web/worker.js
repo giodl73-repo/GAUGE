@@ -1,0 +1,2 @@
+import init,{evaluate_json} from './pkg/gauge_web.js';
+self.onmessage=async({data})=>{try{if(data.type==='init'){await init();self.postMessage({type:'ready'});}else{const start=performance.now();const result=JSON.parse(evaluate_json(JSON.stringify(data.input)));self.postMessage({type:'result',id:data.id,result,ms:performance.now()-start});}}catch(e){self.postMessage({type:'error',id:data.id,message:String(e)});}};

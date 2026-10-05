@@ -4,21 +4,21 @@
 
 Repo: GAUGE
 
-Interface type: target (greenfield). Controls GAUGE's external and cross-layer
-boundaries so future work packages cannot change them silently. IF-001..004
-restate the `SPECIFICATION_BASELINE.md` public contracts; IF-005..006 add the crate
-API and CLI introduced in `ARCHITECTURE.md`. None are implemented yet.
+Interface type: implemented target. Controls GAUGE's external and cross-layer
+boundaries so future changes cannot alter them silently. IF-001..004 restate
+the `SPECIFICATION_BASELINE.md` public contracts; IF-005..006 add the crate API
+and CLI introduced in `ARCHITECTURE.md`.
 
 ## Interface Inventory
 
 | ID | Interface | Type | Owner | Consumers | Compatibility Rule | Verification |
 |---|---|---|---|---|---|---|
-| IF-001 | Corpus entry file | file (markdown + frontmatter) | PKG-002 | analysts, PKG-003/004/005, reviewers | Frontmatter keys additive; `id` immutable | future VER-004 / schema check |
-| IF-002 | `data/sources.md` registry | file (registry) | PKG-002 / data steward | citation audit, all scored quantities | Source entries append/annotate; ids stable | future VER-003 / citation audit |
-| IF-003 | Rubric version record | file | PKG-003 | scoring, calibration | Dimension set + weights versioned | future VER-006 / calibration record |
-| IF-004 | Tier/SLA record | file | PKG-004 | tier classification, gap analysis | Tier set + SLA terms versioned; reassignment recorded | future VER-014 / schema check |
-| IF-005 | `gauge-network` library API | API (Rust crate) | PKG-001 | PKG-002..006 | Public types/functions semver; breaking change is change-control | future VER-007 / cargo test |
-| IF-006 | `gauge` CLI | CLI | PKG-006 | maintainers, agents, analysts | Subcommands/flags additive; output schemas versioned | future VER-001 / command review |
+| IF-001 | Corpus entry file | file (markdown + frontmatter) | PKG-002 | analysts, PKG-003/004/005, reviewers | Frontmatter keys additive; `id` immutable | VER-004 / schema check |
+| IF-002 | `data/sources.md` registry | file (registry) | PKG-002 / data steward | citation audit, all scored quantities | Source entries append/annotate; ids stable | VER-003 / citation audit |
+| IF-003 | Rubric version record | file | PKG-003 | scoring, calibration | Dimension set + weights versioned | VER-006 / calibration record |
+| IF-004 | Tier/SLA record | file | PKG-004 | tier classification, gap analysis | Tier set + SLA terms versioned; reassignment recorded | VER-014 / schema check |
+| IF-005 | `gauge-network` library API | API (Rust crate) | PKG-001 | PKG-002..006 | Public types/functions semver; breaking change is change-control | VER-007 / cargo test |
+| IF-006 | `gauge` CLI | CLI | PKG-006 | maintainers, agents, analysts | Subcommands/flags additive; output schemas versioned | VER-001 / command review |
 
 ## Interface Details
 
@@ -35,7 +35,7 @@ Errors: missing `id` or uncited quantity â†’ held (REQ-005); type/scope drift â†
 Scope Keeper finding.
 
 Versioning: frontmatter keys additive; `id` semantics immutable; schema lives in
-`corpus/SCHEMA.md` (deferred).
+`corpus/SCHEMA.md`.
 
 Evidence: future VER-004; `proof check .` for doc integrity.
 
@@ -119,8 +119,8 @@ Evidence: future VER-001 (command review).
 
 | ID | Question | Disposition |
 |---|---|---|
-| IFQ-001 | Exact corpus frontmatter schema and `corpus/SCHEMA.md`. | Defer to first corpus wave. |
-| IFQ-002 | CLI output formats (JSON/CSV/markdown) per subcommand. | Defer to IMPLEMENTATION_PLAN. |
+| IFQ-001 | Exact corpus frontmatter schema and `corpus/SCHEMA.md`. | Closed by `corpus/SCHEMA.md`. |
+| IFQ-002 | CLI output formats (JSON/CSV/markdown) per subcommand. | Closed by CLI artifact output. |
 | IFQ-003 | Whether FLETCH owns acquisition behind IF-006 or a separate adapter. | Defer to intake. |
 
 ## Role Review Notes
@@ -135,3 +135,7 @@ Evidence: future VER-001 (command review).
 Fixed-point note: no actionable finding required a change; interfaces are
 consistent with SPEC public contracts and architecture boundaries. No unresolved
 critical/major finding. Schema and output-format details deferred to IFQ-001..003.
+
+## IF-007 Browser frequency adapter
+
+Request: JSON <=8KB; corridor index 0-11, round_trips 0-32, bar 0-10. Response: baseline/scenario frequency rows and native dispersion classification, historical_source_id and frequency_basis. Invalid/unknown fields rejected; WASM worker communicates request IDs and errors. No live timetable or full tier-SLA contract.

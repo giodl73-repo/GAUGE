@@ -138,6 +138,15 @@ pub enum ScoreError {
     OutOfRange(f64),
 }
 
+/// Historical DIM-07 frequency transform, rounded like the committed corpus.
+/// This heuristic does not model service operability or the other dimensions.
+pub fn frequency_score(round_trips_per_day: f64) -> Result<Score, ScoreError> {
+    if !round_trips_per_day.is_finite() || round_trips_per_day < 0. {
+        return Err(ScoreError::OutOfRange(round_trips_per_day));
+    }
+    Score::new(((round_trips_per_day * 10. / 16.).clamp(0., 10.) * 10.).round() / 10.)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
