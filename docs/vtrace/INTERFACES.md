@@ -135,3 +135,7 @@ Evidence: future VER-001 (command review).
 Fixed-point note: no actionable finding required a change; interfaces are
 consistent with SPEC public contracts and architecture boundaries. No unresolved
 critical/major finding. Schema and output-format details deferred to IFQ-001..003.
+
+## IF-007 Browser frequency adapter
+
+Request: JSON <=8KB; corridor index 0-11, round_trips 0-32, bar 0-10. Response: baseline/scenario frequency rows and native dispersion classification, historical_source_id and frequency_basis. Invalid/unknown fields rejected; WASM worker communicates request IDs and errors. No live timetable or full tier-SLA contract.

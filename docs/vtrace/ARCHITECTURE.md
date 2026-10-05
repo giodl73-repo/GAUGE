@@ -103,3 +103,7 @@ public sources (FRA / Amtrak / BTS-NTAD / Census)
 Fixed-point note: one actionable finding (potential dependency cycle) was raised
 and applied by fixing the dependency direction. No unresolved critical/major
 finding. Detailed package boundaries deferred to `PACKAGE_BOUNDARIES.md`.
+
+## PKG-007 Pages adapter
+
+gauge-web depends on gauge-corpus, gauge-score and gauge-gap. Committed historical corpus is compiled into WASM; web worker executes bounded requests locally. gauge-cli remains native; neither builds nor browser execution depend on TRACKER paths.

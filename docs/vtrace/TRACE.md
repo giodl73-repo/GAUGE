@@ -80,3 +80,7 @@ and public-claim limits explicit.
 Fixed-point note: no actionable finding required a change; the matrix's value is
 exposing the greenfield gaps (no `WP-*`/`EVID-*` yet), recorded as
 `deferred`/`planned` rather than fabricated. No unresolved critical/major finding.
+
+## Browser WP-007 trace
+
+REQ-001/003/007/010 -> accepted WP-007 -> gauge-score::frequency_score + gauge-web embedded historical corpus/native gap -> frequency.spec.js + gauge-web unit tests. Other 12 dimensions and tier-SLA conformance are explicitly unassessed.

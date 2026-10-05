@@ -83,3 +83,9 @@ git diff --check
 Fixed-point note: no actionable finding required a change. The plan honestly
 separates verified-now (process/doc) from pending (implementation). No unresolved
 critical/major finding.
+
+## WP-007 Browser evidence
+
+Native: corpus_frequency_transform_matches_stored_scores, historical_baseline_and_changed_membership, invalid_and_boundary_inputs. Browser: actual WASM baseline/keyboard/share/JSON; selection/bar/mobile/source scope; invalid URL and failed WASM exports. Run npm ci, python tools/build-pages.py, npm run test:pages. Full workspace tests/clippy remain required.
+
+Additional WP-007 regressions: rapid switching; reset during delayed WASM initialization; exact bar 3.6 / score 3.6 stays adequate, five remaining below classified as tail. Existing native weighted thresholds are preserved by the new explicit override API.
