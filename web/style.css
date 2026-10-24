@@ -6,3 +6,5 @@
 .timebar{display:flex;min-height:32px;border-radius:6px;overflow:hidden}.timebar span{min-width:0;overflow:hidden;padding:4px;color:#fff;font-size:.75rem;background:#225d64}.timebar span:nth-child(2){background:#9b6425}.timebar span:nth-child(3){background:#875670}.timebar span:nth-child(4){background:#526575}.timeline p{margin-bottom:4px}
 
 .score-meter{display:inline-block;width:80px;height:7px;background:#dbe6df;margin-right:8px}.score-meter i{display:block;height:100%;background:#225d64}tr.selected{background:#edf3ec}footer{flex-wrap:wrap}
+
+header{flex-wrap:wrap}header #taxlane{font-size:14px}
