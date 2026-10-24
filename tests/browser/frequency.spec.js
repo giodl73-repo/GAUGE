@@ -8,7 +8,9 @@ test('historical baseline, keyboard scenario, share and JSON use actual WASM',as
  await expect(page.locator('#below')).toHaveText('8 → 7');await expect(page.locator('#score')).toHaveText('0.6 → 10.0');
  const promise=page.waitForEvent('download');await page.locator('#download').click();const download=await promise;const json=JSON.parse(await fs.readFile(await download.path(),'utf8'));expect(json.model).toBe('gauge-frequency-v2');expect(json.input.round_trips).toBe(32);expect(json.baseline.corridors[0].historical_source_id).toBe('wikipedia-amtrak-routes');
  await page.locator('#share').click();await expect(page).toHaveURL(/round_trips=32/);await page.reload();await expect(page.locator('#status')).toContainText('Ready');await expect(page.locator('#below')).toHaveText('8 → 7');
- await page.getByRole('button',{name:'Reset',exact:true}).click();await expect(page.locator('#below')).toHaveText('8 → 8');expect(errors).toEqual([]);
+ await page.getByRole('button',{name:'Reset',exact:true}).click();await expect(page.locator('#below')).toHaveText('8 → 8');await expect(page.locator('#taxlane')).toHaveAttribute('href','https://giodl73-repo.github.io/TAXLANE/#evidence-transportation');
+ const provenance=await (await page.request.get('/GAUGE/provenance.json')).json();expect(provenance.commit).toMatch(/^[0-9a-f]{40}$/);expect((await page.request.get('/GAUGE/THIRD-PARTY-LICENSES.txt')).ok()).toBe(true);
+ expect(errors).toEqual([]);
 });
 test('corridor selection, changed bar and mobile retain evidence scope',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/GAUGE/');await expect(page.locator('#status')).toContainText('Ready');
