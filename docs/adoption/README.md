@@ -17,7 +17,7 @@ sources:
 ## Purpose
 
 GAUGE is public and open to use. Use it as a reference model for evidence-gated
-passenger-rail service analysis, as a cited finding, or as a pattern for a
+passenger-rail service analysis, as a historical frequency-model illustration, or as a pattern for a
 bounded corridor, regional, station-access, or state-plan adaptation.
 
 Public use does not create an engineering study, environmental review,
@@ -30,7 +30,7 @@ claim.
 | If You Are | Start With | What You Can Do |
 |---|---|---|
 | Public reader | [`README.md`](../../README.md) | Understand the rail service-promise model. |
-| Researcher | [`docs/findings/2026-06-frequency-span-of-service.md`](../findings/2026-06-frequency-span-of-service.md) | Inspect the cited frequency/span finding. |
+| Researcher | [`docs/findings/2026-06-frequency-span-of-service.md`](../findings/2026-06-frequency-span-of-service.md) | Inspect model behavior and unresolved original-timetable custody. |
 | Planner or advocate | [`local-adaptation-worksheet.md`](local-adaptation-worksheet.md) | Scope a corridor or regional rail-service question without overclaiming. |
 | Builder or contributor | [`docs/vtrace/`](../vtrace) | Work from requirements, traceability, and evidence labels. |
 

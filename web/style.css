@@ -8,3 +8,5 @@
 .score-meter{display:inline-block;width:80px;height:7px;background:#dbe6df;margin-right:8px}.score-meter i{display:block;height:100%;background:#225d64}tr.selected{background:#edf3ec}footer{flex-wrap:wrap}
 
 header{flex-wrap:wrap}header #taxlane{font-size:14px}
+
+#source-audit{margin-top:36px;max-width:960px}#source-audit table{min-width:700px}#source-audit details{max-width:100%}

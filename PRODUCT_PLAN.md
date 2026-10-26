@@ -16,9 +16,13 @@ where the evidence supports them.
 
 ## Current evidence
 
-The first cited frequency analysis covers 12 US corridors and classifies the
-majority-below-bar distribution as systemic. Broader corpus coverage, additional
-dimensions, and proposal review remain future work.
+The corrected historical frequency illustration retains twelve model entries
+and classifies their majority-below-bar distribution as a systemic model pattern.
+All twelve physical frequency quantities are source-needed after the 2026-10-26
+custody audit. Frequency does not measure actual span, spacing or operating days;
+these entries do not establish national representativeness or an upgrade target.
+Dated original timetable acquisition and independent source-to-score review
+precede evidence promotion. Broader corpus coverage, additional dimensions, and proposal review remain future work.
 
 ## Next public work
 

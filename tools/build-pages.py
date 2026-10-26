@@ -1,5 +1,6 @@
 """Build GAUGE's bounded frequency explorer from its native Rust core."""
 import argparse
+import runpy
 import json
 import shutil
 import subprocess
@@ -13,6 +14,8 @@ def run(*args):
 
 
 def main():
+    custody_tools = runpy.run_path(str(ROOT / 'tools/source-custody.py'))
+    source_audit = custody_tools['audit']()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("dist/GAUGE"))
     args = parser.parse_args()
@@ -33,6 +36,30 @@ def main():
     shutil.copy2(ROOT / "THIRD-PARTY-LICENSES.txt", output / "THIRD-PARTY-LICENSES.txt")
     def capture(*args):
         return subprocess.check_output(args, cwd=ROOT, text=True, encoding="utf-8").strip()
+    # Native canonical references also guard all legacy numeric/scenario fields.
+    cache = ROOT / '.cache'
+    cache.mkdir(exist_ok=True)
+    previous = json.loads((ROOT / 'fixtures/pre-correction-results.json').read_text(encoding='utf-8'))
+    references = []
+    for name, old in zip(['baseline', 'single', 'portfolio', 'exact-bar'], previous['cases'], strict=True):
+        path = f'fixtures/browser-{name}.json'
+        canonical = capture('cargo', 'run', '--locked', '--quiet', '-p', 'gauge-web', '--bin', 'gauge-browser', '--', path)
+        result = json.loads(canonical)
+        legacy = json.loads(canonical)
+        legacy.pop('evidence')
+        for run_name in ['baseline', 'scenario']:
+            for row in legacy[run_name]['corridors']:
+                row.pop('historical_evidence_label')
+                row.pop('historical_primary_source_verified')
+        if legacy != old['result']:
+            raise ValueError('Existing numeric/scenario output changed: ' + name)
+        references.append({'input': (ROOT / path).read_text(encoding='utf-8'), 'canonical': canonical})
+    native_rows = {row['slug']: (row['historical_trips'], row['score'], row['historical_evidence_label']) for row in result['baseline']['corridors']}
+    audit_rows = {row['slug']: (row['retained_round_trips_per_day'], row['illustrative_score'], row['evidence_label']) for row in source_audit['entries']}
+    if native_rows != audit_rows:
+        raise ValueError('Published audit differs from the embedded native corpus')
+    (cache / 'native-results.json').write_bytes((json.dumps(references) + '\n').encode('utf-8'))
+    custody_tools['publish'](output, source_audit)
     provenance = {"commit": capture("git", "rev-parse", "HEAD"), "dirty": bool(capture("git", "status", "--porcelain")), "rust": capture("rustc", "--version"), "bindings": version, "source": "https://github.com/giodl73-repo/GAUGE"}
     (output / "provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")
     (output / ".nojekyll").touch()
