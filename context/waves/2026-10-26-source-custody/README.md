@@ -30,3 +30,16 @@ engineering/timetable authority or fiscal admission is claimed. TAXLANE changes
 its transportation provider/caveat and assertions only; accounting is unchanged.
 Child checks/merge/Pages and exact live exit precede the scoped root snapshot.
 Other satellites, ICELINES and BISECT remain no-op.
+
+## Clean local exit
+
+All twelve GAUGE browser cases now pass after the mobile width correction and
+clean implementation build, including all nine original cases. Four executing-
+WASM results match native canonical bytes and preserve every pre-existing field
+against the prior deployed-WASM fixture. Source/derivative hashes, original
+preservation, cleared-score holds, audit download, WASM failure and keyboard/
+mobile checks pass. All five TAXLANE local browser cases also pass. Desktop/
+mobile screenshots inspected; all ten implementing-agent review lenses repeat
+pass for this bounded correction, with the named evidence deferrals retained.
+The last local package is approximately 633 KB. Final commit/deployment/live
+identity remains a publication gate recorded in TRACKER.
