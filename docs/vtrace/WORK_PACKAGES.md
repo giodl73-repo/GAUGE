@@ -255,3 +255,12 @@ Contract: preserve the historical 12-entry baseline; retain hypothetical edits b
 | Numeracy Checker | resolved | Shared bar, finite bounds, stable keys, existing one-decimal transform. |
 
 Fixed point: no unresolved critical/major finding. Exit: format, strict clippy, workspace tests, real-WASM multi-edit/preset/reset/share/export and legacy-link tests, clean Codex review and exact-head Pages deployment.
+
+# WP-009: Frequency source custody and interpretation correction
+
+Accepted 2026-10-26; contract, all ten role dispositions and source-review
+acceptance: [WP_009.md](WP_009.md). Relabel twelve original quantities
+source-needed; retain all numeric scenarios and source IDs. Expose derivative
+custody, preserve/correct the original finding and add explicit source/null/false
+metadata to native/WASM exports. No measured span, daily-pattern or national
+inference follows. Publication and exact live exit belong to the release snapshot.

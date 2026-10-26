@@ -15,7 +15,7 @@ preserves the possibility that driving or flying is the stronger answer.
 
 [Open the Rust-powered frequency explorer](https://giodl73-repo.github.io/GAUGE/).
 Build a multi-corridor portfolio, retain hypothetical round trips/day edits when switching corridors and the provisional adequacy bar, compare corpus frequency gaps, share a scenario or download JSON.
-The committed 2023/2024 corpus is historical, not a live timetable. Only DIM-07 is assessed; tier metadata does not imply tier-SLA conformance. Added service does not prove host-track capacity or operating feasibility.
+The committed 2023/2024 model corpus is source-needed, not a verified or live timetable. Only DIM-07 is assessed; tier metadata does not imply tier-SLA conformance. Added service does not prove host-track capacity or operating feasibility.
 Build and scope: [browser explorer](docs/browser-explorer.md).
 
 ## Show someone (start here)
@@ -56,8 +56,8 @@ boundary.
 
 ## Use GAUGE
 
-GAUGE is public and open to use as a reference model, cited rail-service
-finding, diagnostic pattern, review discipline, or local adaptation starting
+GAUGE is public and open to use as a reference model, historical frequency-model
+illustration, diagnostic pattern, review discipline, or local adaptation starting
 point.
 
 ### Reuse boundary
@@ -102,10 +102,21 @@ service promise, not by winning a narrative.**
 
 The current
 [frequency and span-of-service analysis](docs/findings/2026-06-frequency-span-of-service.md)
-covers 12 US corridors. Eight fall below the declared bar, producing a systemic
-rather than tail-only gap classification.
+covers twelve retained corridor/brand model entries. Eight scores fall below the
+provisional bar, producing a systemic model pattern. All twelve frequency
+quantities need original timetable sources; no national representativeness,
+actual service-span result or intervention mandate is established.
+
+Inspect the [source audit](https://giodl73-repo.github.io/GAUGE/#source-audit),
+exact corpus downloads and preserved original finding. Source labels, null
+service observations and false authority flags remain in native/WASM exports
+even if every hypothetical score clears its bar.
 
 That is evidence about the tested corpus, not a national construction mandate.
+Here that evidence is detector behavior on source-needed model inputs.
+
+Native replay: `cargo run --locked -p gauge-web --bin gauge-browser -- fixtures/browser-baseline.json`.
+Source audit and accepted scope: [WP-009](docs/vtrace/WP_009.md).
 
 ## Quick start
 

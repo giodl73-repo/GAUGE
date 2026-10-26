@@ -72,6 +72,8 @@ pub struct Corridor {
     pub score: f64,
     pub below_bar: bool,
     pub historical_source_id: String,
+    pub historical_evidence_label: Option<gauge_corpus::EvidenceLabel>,
+    pub historical_primary_source_verified: bool,
     pub frequency_basis: String,
 }
 #[derive(Debug, Serialize)]
@@ -86,6 +88,59 @@ pub struct Output {
     pub input: Input,
     pub baseline: Run,
     pub scenario: Run,
+    pub evidence: EvidenceBoundary,
+}
+
+/// Source and service limits apply to every retained corridor and every scenario.
+#[derive(Debug, Serialize)]
+pub struct EvidenceBoundary {
+    pub schema: &'static str,
+    pub scope: &'static str,
+    pub primary_source_verified: bool,
+    pub unassessed_dimensions: Vec<&'static str>,
+    pub observations: std::collections::BTreeMap<&'static str, Option<f64>>,
+    pub authority: std::collections::BTreeMap<&'static str, bool>,
+}
+
+fn evidence_boundary() -> EvidenceBoundary {
+    EvidenceBoundary {
+        schema: "gauge.frequency-source-boundary.v1",
+        scope: "twelve historical model entries; frequency proxy only; national representativeness unobserved",
+        primary_source_verified: false,
+        unassessed_dimensions: Dimension::ALL
+            .into_iter()
+            .filter(|dimension| *dimension != Dimension::Dim07)
+            .map(Dimension::key)
+            .collect(),
+        observations: [
+            "service_span_hours",
+            "departure_spacing_minutes",
+            "operating_days_per_week",
+            "national_representativeness",
+            "host_track_capacity",
+            "reliability",
+            "ridership",
+            "access_equity",
+            "modal_shift",
+            "costs",
+            "savings",
+        ]
+        .into_iter()
+        .map(|name| (name, None))
+        .collect(),
+        authority: [
+            "timetable",
+            "engineering",
+            "construction",
+            "funding",
+            "fiscal_admission",
+            "savings",
+            "rate_change",
+        ]
+        .into_iter()
+        .map(|name| (name, false))
+        .collect(),
+    }
 }
 fn corpus() -> Result<Vec<CorpusEntry>, String> {
     FIXTURES
@@ -148,6 +203,8 @@ fn run(corpus: &[CorpusEntry], bar: f64) -> Result<Run, String> {
                     .source_id
                     .clone()
                     .ok_or("Missing source")?,
+                historical_evidence_label: historical.quantities[0].label.clone(),
+                historical_primary_source_verified: false,
             })
         })
         .collect::<Result<Vec<_>, String>>()?;
@@ -196,6 +253,7 @@ pub fn evaluate(input: Input) -> Result<Output, String> {
         input,
         baseline,
         scenario,
+        evidence: evidence_boundary(),
     })
 }
 #[cfg_attr(feature = "wasm", wasm_bindgen::prelude::wasm_bindgen)]
@@ -211,6 +269,61 @@ pub fn evaluate_json(json: &str) -> Result<String, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn original_source_labels_survive_hypothetical_edits() {
+        let out = evaluate(Input {
+            portfolio: Default::default(),
+            corridor: 0,
+            round_trips: 32.,
+            bar: 7.,
+        })
+        .unwrap();
+        for corridor in out.baseline.corridors.iter().chain(&out.scenario.corridors) {
+            assert_eq!(
+                corridor.historical_evidence_label,
+                Some(gauge_corpus::EvidenceLabel::SourceNeeded)
+            );
+            assert!(!corridor.historical_primary_source_verified);
+            assert_eq!(corridor.historical_source_id, "wikipedia-amtrak-routes");
+        }
+        assert_eq!(out.scenario.corridors[0].frequency_basis, "hypothetical");
+        assert_eq!(out.scenario.corridors[1].frequency_basis, "historical");
+    }
+
+    #[test]
+    fn clearing_every_model_gap_keeps_service_and_authority_unknown() {
+        let portfolio = FIXTURES
+            .iter()
+            .map(|(slug, _)| ((*slug).to_string(), 16.))
+            .collect();
+        let out = evaluate(Input {
+            portfolio,
+            corridor: 0,
+            round_trips: 16.,
+            bar: 7.,
+        })
+        .unwrap();
+        assert_eq!(out.scenario.below, 0);
+        assert_eq!(out.evidence.unassessed_dimensions.len(), 12);
+        assert!(!out.evidence.unassessed_dimensions.contains(&"DIM-07"));
+        assert!(out.evidence.observations.values().all(Option::is_none));
+        assert!(out.evidence.authority.values().all(|value| !value));
+        assert!(!out.evidence.primary_source_verified);
+    }
+
+    #[test]
+    fn json_download_preserves_explicit_nulls_and_source_needed_label() {
+        let text = evaluate_json(r#"{"corridor":0,"round_trips":1,"bar":7}"#).unwrap();
+        let out: serde_json::Value = serde_json::from_str(&text).unwrap();
+        assert_eq!(
+            out["baseline"]["corridors"][0]["historical_evidence_label"],
+            "source-needed"
+        );
+        assert!(out["evidence"]["observations"]["service_span_hours"].is_null());
+        assert!(out["evidence"]["observations"]["operating_days_per_week"].is_null());
+        assert_eq!(out["evidence"]["authority"]["timetable"], false);
+        assert_eq!(out["evidence"]["authority"]["fiscal_admission"], false);
+    }
     #[test]
     fn historical_baseline_and_changed_membership() {
         let out = evaluate(Input {

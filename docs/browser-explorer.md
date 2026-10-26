@@ -13,3 +13,22 @@ WP-007 acceptance and all ten role dispositions are in docs/vtrace/WORK_PACKAGES
 ## Portfolio scenarios (v2)
 
 Edits are retained by corpus slug when switching corridors. The optional `portfolio` URL parameter is a JSON map of slug to hypothetical round trips/day; it overrides the legacy selected-corridor value. Existing `corridor`, `round_trips`, `bar` links remain supported. The 12-trip preset raises low frequencies while preserving higher ones. Reset clears all edits. Export includes the complete map and both runs. Historical sources and all unassessed dimensions remain unchanged.
+
+## Source-custody correction (WP-009)
+
+All twelve original frequency quantities are source-needed. Existing v2 inputs,
+share links and numerical fields remain; exports add each original quantity's
+actual `historical_evidence_label`, false `historical_primary_source_verified`
+and a versioned `evidence` boundary. Eleven service/representativeness/cost
+observations stay explicit null; seven authorities stay false. Twelve other
+native dimensions remain unassessed even if every model score clears the bar.
+The average is a frequency proxy, not measured span, spacing or operating days.
+
+The static audit remains available without WASM, with twelve exact corpus copies,
+corrected and superseded-original findings, registry, audit note and hashes.
+No primary source is verified by a derivative-file hash. `source-audit.json`
+distinguishes absent original source locators/hashes from retained record custody.
+The native `gauge-browser` binary and actual WASM match canonical JSON on four
+fixtures; the build also compares every pre-existing v2 field with the original
+deployed-WASM results before this additive metadata correction. No score/gap
+algorithm, numeric value, tier or provisional threshold changed.

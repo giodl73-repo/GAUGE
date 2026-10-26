@@ -32,19 +32,20 @@ CORPUS -> SCORE -> TIER-SLA -> GAP -> CONCEPT -> REVIEW -> DESIGN
 
 ### A. Planner / researcher path
 
-**Question GAUGE answers well:** *Which corridors fail credible frequency,
-span, trip-time, reliability, or connectivity promises on a cited corpus?*
+**Question GAUGE answers well:** *How does the native frequency detector classify a retained model distribution
+while keeping source, span, reliability and access evidence held?*
 
 | Step | What to look at | Why |
 |---|---|---|
 | 1 | README boundary callout | No advocacy-brief framing |
-| 2 | [2026-06 frequency / span finding](docs/findings/2026-06-frequency-span-of-service.md) | 12-corridor cited run; 8 below bar → systemic gap class |
+| 2 | [2026-06 frequency / span finding](docs/findings/2026-06-frequency-span-of-service.md) | 12-entry source-needed model; 8 scores below bar → systemic model class |
 | 3 | [Adoption / local adaptation](docs/adoption/README.md) | Reuse without overclaim |
 | 4 | Reproduce | `cargo run -p gauge-cli -- gap --input corpus` |
 
 **Headline (cite with scope):** on the documented 12-corridor DIM-07 frequency
-run, eight corridors fall below the declared bar — evidence about **that corpus
-and dimension**, not a national construction mandate.
+run, eight retained scores fall below the provisional bar. All twelve physical
+frequency quantities need original timetables; no actual span, national-network
+or construction conclusion is established.
 
 **Do not say:** build HSR here, Amtrak timetable replacement, or host-railroad
 agreement.
@@ -70,7 +71,7 @@ cargo test --workspace
 
 | Field | Value |
 |---|---|
-| Claim text | GAUGE can be shown as Rail 2.0 service-promise scoring with at least one cited frequency finding and a reusable CLI pipeline. |
+| Claim text | GAUGE can be shown as Rail 2.0 service-promise scoring with a historical frequency-model illustration and a reusable CLI pipeline. |
 | Audience | Mobility researchers; CLI implementers. |
 | Evidence | README; 2026-06 finding; adoption docs; CLI reproduce path. |
 | Validation | Finding-scoped corpus run; not nationwide operations certification. |
