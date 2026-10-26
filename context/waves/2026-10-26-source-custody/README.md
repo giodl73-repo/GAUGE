@@ -43,3 +43,14 @@ mobile screenshots inspected; all ten implementing-agent review lenses repeat
 pass for this bounded correction, with the named evidence deferrals retained.
 The last local package is approximately 633 KB. Final commit/deployment/live
 identity remains a publication gate recorded in TRACKER.
+
+## Route-specific source-note exit
+
+Final review caught the Sunset Limited entry's distinct parenthetical sentence,
+which the generic prose correction had not replaced. Correct that remaining
+claim of cited counts and exact 0.4 = 3/7 to an explicit rounded, source-needed
+model claim. The dated schedule and operating-day pattern remain unverified;
+value 0.4, score 0.3 and all scenario results are unchanged. This completes the
+already accepted WP-009 source/rounding contract. Build-time audit/regression and
+PITFALL checks remain required; final hosted/live receipts must use this corrected
+commit rather than the preceding deployment.
