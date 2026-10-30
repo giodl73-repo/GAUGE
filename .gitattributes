@@ -1,3 +1,6 @@
 
 # Preserve the exact pre-correction finding Git blob across platforms.
 data/history/2026-06-frequency-span-of-service-original.md -text
+
+# Preserve recovered publisher PDF bytes exactly.
+data/cascades-2023/*.pdf binary

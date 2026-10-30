@@ -6,6 +6,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from timetable_source import verify as verify_timetable
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -16,6 +18,7 @@ def run(*args):
 def main():
     custody_tools = runpy.run_path(str(ROOT / 'tools/source-custody.py'))
     source_audit = custody_tools['audit']()
+    verify_timetable()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("dist/GAUGE"))
     args = parser.parse_args()
@@ -30,7 +33,7 @@ def main():
     wasm = Path(metadata["target_directory"]) / "wasm32-unknown-unknown/release/gauge_web.wasm"
     output.mkdir(parents=True, exist_ok=True)
     run("wasm-bindgen", str(wasm), "--target", "web", "--out-dir", str(output / "pkg"))
-    for name in ("index.html", "style.css", "app.js", "worker.js"):
+    for name in ("index.html", "style.css", "app.js", "worker.js", "timetable.js", "timetable-worker.js"):
         shutil.copy2(ROOT / "web" / name, output / name)
     shutil.copy2(ROOT / "LICENSE", output / "LICENSE")
     shutil.copy2(ROOT / "THIRD-PARTY-LICENSES.txt", output / "THIRD-PARTY-LICENSES.txt")
@@ -60,6 +63,14 @@ def main():
         raise ValueError('Published audit differs from the embedded native corpus')
     (cache / 'native-results.json').write_bytes((json.dumps(references) + '\n').encode('utf-8'))
     custody_tools['publish'](output, source_audit)
+    timetable_refs=[]
+    for direction in ['southbound','northbound']:
+        for include in ['false','true']:
+            path=f'fixtures/timetable-{direction}-{include}.json'
+            canonical=capture('cargo','run','--locked','--quiet','-p','gauge-web','--bin','gauge-timetable','--',path)
+            timetable_refs.append({'input':(ROOT/path).read_text(encoding='utf-8'),'canonical':canonical})
+    (cache/'timetable-results.json').write_bytes((json.dumps(timetable_refs)+'\n').encode())
+    shutil.copytree(ROOT/'data/cascades-2023',output/'schedule',dirs_exist_ok=True)
     provenance = {"commit": capture("git", "rev-parse", "HEAD"), "dirty": bool(capture("git", "status", "--porcelain")), "rust": capture("rustc", "--version"), "bindings": version, "source": "https://github.com/giodl73-repo/GAUGE"}
     (output / "provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")
     (output / ".nojekyll").touch()

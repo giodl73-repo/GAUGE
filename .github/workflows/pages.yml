@@ -24,6 +24,7 @@ jobs:
       - name: Install pinned tools
         timeout-minutes: 5
         run: |
+          python -m pip install --require-hashes --only-binary=:all: -r tools/requirements-timetable.txt
           rustup show
           mkdir -p .cache/bindgen
           curl --fail --location --retry 2 --max-time 60 https://github.com/wasm-bindgen/wasm-bindgen/releases/download/0.2.127/wasm-bindgen-0.2.127-x86_64-unknown-linux-musl.tar.gz -o .cache/bindgen.tar.gz
@@ -39,6 +40,7 @@ jobs:
           cargo clippy --locked --workspace --all-targets -- -D warnings
       - name: Build Pages and test browser
         run: |
+          cargo clippy --locked -p gauge-web --lib --features wasm --target wasm32-unknown-unknown -- -D warnings
           python tools/build-pages.py
           npm run test:pages
       - uses: actions/upload-pages-artifact@v3

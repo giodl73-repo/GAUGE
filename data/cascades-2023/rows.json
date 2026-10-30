@@ -1,0 +1,162 @@
+{
+  "schema": "gauge.cascades-schedule.v1",
+  "effective_date": "2023-12-11",
+  "calendar": "Printed daily pattern: weekdays and weekends the same; not actual operation evidence",
+  "rows": [
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 1,
+      "train_number": "503",
+      "long_distance": false,
+      "departure_minute": 352,
+      "arrival_minute": 557,
+      "departure_printed": "5:52 am",
+      "arrival_printed": "9:17 am"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 2,
+      "train_number": "505",
+      "long_distance": false,
+      "departure_minute": 428,
+      "arrival_minute": 633,
+      "departure_printed": "7:08 am",
+      "arrival_printed": "10:33 am"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 3,
+      "train_number": "11",
+      "long_distance": true,
+      "departure_minute": 590,
+      "arrival_minute": 830,
+      "departure_printed": "9:50 am",
+      "arrival_printed": "1:50 pm"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 4,
+      "train_number": null,
+      "long_distance": false,
+      "departure_minute": 730,
+      "arrival_minute": 935,
+      "departure_printed": "12:10 pm",
+      "arrival_printed": "3:35 pm"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 5,
+      "train_number": "507",
+      "long_distance": false,
+      "departure_minute": 860,
+      "arrival_minute": 1065,
+      "departure_printed": "2:20 pm",
+      "arrival_printed": "5:45 pm"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 6,
+      "train_number": "509",
+      "long_distance": false,
+      "departure_minute": 1060,
+      "arrival_minute": 1265,
+      "departure_printed": "5:40 pm",
+      "arrival_printed": "9:05 pm"
+    },
+    {
+      "direction": "southbound",
+      "page": 1,
+      "column": 7,
+      "train_number": "511",
+      "long_distance": false,
+      "departure_minute": 1190,
+      "arrival_minute": 1395,
+      "departure_printed": "7:50 pm",
+      "arrival_printed": "11:15 pm"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 1,
+      "train_number": "500",
+      "long_distance": false,
+      "departure_minute": 405,
+      "arrival_minute": 610,
+      "departure_printed": "6:45 am",
+      "arrival_printed": "10:10 am"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 2,
+      "train_number": "502",
+      "long_distance": false,
+      "departure_minute": 500,
+      "arrival_minute": 705,
+      "departure_printed": "8:20 am",
+      "arrival_printed": "11:45 am"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 3,
+      "train_number": "504",
+      "long_distance": false,
+      "departure_minute": 640,
+      "arrival_minute": 845,
+      "departure_printed": "10:40 am",
+      "arrival_printed": "2:05 pm"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 4,
+      "train_number": null,
+      "long_distance": false,
+      "departure_minute": 850,
+      "arrival_minute": 1057,
+      "departure_printed": "2:10 pm",
+      "arrival_printed": "5:37 pm"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 5,
+      "train_number": "14",
+      "long_distance": true,
+      "departure_minute": 956,
+      "arrival_minute": 1191,
+      "departure_printed": "3:56 pm",
+      "arrival_printed": "7:51 pm"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 6,
+      "train_number": "506",
+      "long_distance": false,
+      "departure_minute": 1075,
+      "arrival_minute": 1280,
+      "departure_printed": "5:55 pm",
+      "arrival_printed": "9:20 pm"
+    },
+    {
+      "direction": "northbound",
+      "page": 2,
+      "column": 7,
+      "train_number": "508",
+      "long_distance": false,
+      "departure_minute": 1165,
+      "arrival_minute": 1370,
+      "departure_printed": "7:25 pm",
+      "arrival_printed": "10:50 pm"
+    }
+  ],
+  "source_sha256": "20d094bce88fe01d942657965f3db78997b24eb1def820ae7d844e3d59c480c8"
+}
