@@ -18,6 +18,22 @@ Build a multi-corridor portfolio, retain hypothetical round trips/day edits when
 The committed 2023/2024 model corpus is source-needed, not a verified or live timetable. Only DIM-07 is assessed; tier metadata does not imply tier-SLA conformance. Added service does not prove host-track capacity or operating feasibility.
 Build and scope: [browser explorer](docs/browser-explorer.md).
 
+## Inspect a historical timetable
+
+[Inspect frozen Seattle-Portland departures](https://giodl73-repo.github.io/GAUGE/#historical-timetable)
+from the recovered Cascades-branded schedule effective December 11, 2023.
+Shared Rust selects a direction, includes/excludes the designated long-distance
+column and derives printed departure count, within-day span and largest gap.
+Unknown train numbers stay null. This does not validate the model's full
+Vancouver-Eugene entry, live service, actual operation, round trips or any of
+the twelve source-needed quantities. Original PDF, retrieval, transcription
+and limits ship with Pages. [Accepted scope](docs/vtrace/WP_010.md).
+
+Install the hash-pinned build-only verifier with
+`python -m pip install --require-hashes --only-binary=:all: -r tools/requirements-timetable.txt`.
+Verify: `python tools/timetable_source.py`. Native replay:
+`cargo run --locked -p gauge-web --bin gauge-timetable -- fixtures/timetable-southbound-false.json`.
+
 ## Show someone (start here)
 
 | Audience | Path | Time |

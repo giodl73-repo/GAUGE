@@ -1,4 +1,5 @@
 //! Browser adapter for the committed historical frequency corpus.
+pub mod timetable;
 use gauge_corpus::CorpusEntry;
 use gauge_score::{frequency_score, Dimension, Rubric, Score};
 use serde::{Deserialize, Serialize};

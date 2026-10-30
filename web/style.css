@@ -10,3 +10,5 @@
 header{flex-wrap:wrap}header #taxlane{font-size:14px}
 
 #source-audit{margin-top:36px;max-width:960px}#source-audit table{min-width:700px}#source-audit details{max-width:100%}
+
+header{flex-wrap:wrap;gap:16px}#historical-timetable{margin:48px 0;padding:24px;border:1px solid #bac8c0;border-radius:8px}#historical-timetable h2{margin-top:12px}#tt-query{width:100%;max-width:100%;font:13px/1.5 monospace}#historical-timetable label{display:block;margin:14px 0}#tt-direction{max-width:100%;padding:8px}#tt-status{font-weight:600;min-height:2em}.tt-scroll{max-width:100%;overflow:auto}#historical-timetable table{min-width:610px;width:100%;border-collapse:collapse}#historical-timetable th,#historical-timetable td{padding:10px;border-bottom:1px solid #c8d1ca;text-align:left}#historical-timetable details{margin:16px 0}#tt-metrics{font-weight:600}@media(max-width:600px){#historical-timetable{padding:16px}}

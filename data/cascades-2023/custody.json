@@ -1,0 +1,45 @@
+{
+  "requested_url": "https://odotstorage.s3.us-west-2.amazonaws.com/amtrak-cascades-schedule-12-11-23.pdf",
+  "resolved_url": "https://odotstorage.s3.us-west-2.amazonaws.com/amtrak-cascades-schedule-12-11-23.pdf",
+  "retrieved_at_utc": "2026-10-30T06:11:59.614705+00:00",
+  "status": 200,
+  "content_type": "application/pdf",
+  "last_modified": "Mon, 04 Dec 2023 16:52:11 GMT",
+  "bytes": 531418,
+  "sha256": "20d094bce88fe01d942657965f3db78997b24eb1def820ae7d844e3d59c480c8",
+  "source_id": "cascades-schedule-2023-12-11",
+  "issuer_basis": "Amtrak Cascades branding and printed effective date in the document",
+  "host_attribution": "ODOT-named S3 storage; bucket ownership not independently attested",
+  "host_ownership_verified": false,
+  "effective_date": "2023-12-11",
+  "effective_date_is_endless_validity": false,
+  "last_modified_is_publication_date": false,
+  "pages": 2,
+  "seed_quantities_validated": 0,
+  "rejected_capitol_candidates": [
+    {
+      "requested_url": "https://images.capitolcorridor.org/wp-content/uploads/2020/05/Train_Schedules_6.1.20_Preview.pdf",
+      "resolved_url": "https://www.capitolcorridor.org//trainschedule/Train_Schedules.pdf",
+      "retrieved_at_utc": "2026-10-30T06:12:03.353466+00:00",
+      "status": 200,
+      "content_type": "application/pdf",
+      "last_modified": "Mon, 26 Oct 2026 11:50:32 GMT",
+      "bytes": 357422,
+      "sha256": "21002b49a8b33766b602ad9accf3903f52a791b90dbda92144113d67cd1de9b1",
+      "printed_effective_date": "2025-12-08",
+      "historical_2023_2024_evidence": false
+    },
+    {
+      "requested_url": "https://www.capitolcorridor.org/trainschedule/Train_Schedules.pdf?v=01012024",
+      "resolved_url": "https://www.capitolcorridor.org/trainschedule/Train_Schedules.pdf?v=01012024",
+      "retrieved_at_utc": "2026-10-30T06:11:56.071920+00:00",
+      "status": 200,
+      "content_type": "application/pdf",
+      "last_modified": "Mon, 26 Oct 2026 11:50:32 GMT",
+      "bytes": 357422,
+      "sha256": "21002b49a8b33766b602ad9accf3903f52a791b90dbda92144113d67cd1de9b1",
+      "printed_effective_date": "2025-12-08",
+      "historical_2023_2024_evidence": false
+    }
+  ]
+}

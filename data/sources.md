@@ -20,3 +20,12 @@ quantities here. They are all source-needed; IDs and values are retained.
 See [source-audit.md](source-audit.md). The 0.4/day value is rounded, not exactly
 3/7 and not proof of service every day. Counts do not establish measured span,
 segment coverage, operating days or national representativeness.
+
+## Frozen schedule observation - 2026-10-30
+
+`cascades-schedule-2023-12-11`: recovered Amtrak Cascades-branded PDF, printed
+effective December 11, 2023; original URL/hash and host-attribution limitation
+in `data/cascades-2023/custody.json`. Fourteen Seattle-Portland directional
+columns are independently transcribed; original publisher rights remain.
+This separate source does not validate any seed quantity or full route scope.
+See `data/cascades-2023/SOURCE-NOTICE.md` for grain and remaining gates.
